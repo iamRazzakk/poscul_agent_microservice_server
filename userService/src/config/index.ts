@@ -17,23 +17,12 @@ export default {
     audience: process.env.JWT_AUDIENCE!,
     tokenVersion: process.env.tokenVersion!,
   },
-  stripe: {
-    stripeSecretKey: process.env.STRIPE_API_SECRET,
-    webhookSecret: process.env.WEBHOOK_SECRET,
-    paymentSuccess: process.env.WEBHOOK_SECRET,
-  },
   email: {
     from: process.env.EMAIL_FROM,
     user: process.env.EMAIL_USER,
     port: process.env.EMAIL_PORT,
     host: process.env.EMAIL_HOST,
     pass: process.env.EMAIL_PASS,
-  },
-  social: {
-    google_client_id: process.env.GOOGLE_CLIENT_ID,
-    facebook_client_id: process.env.FACEBOOK_CLIENT_ID,
-    google_client_secret: process.env.GOOGLE_CLIENT_SECRET,
-    facebook_client_secret: process.env.FACEBOOK_CLIENT_SECRET,
   },
   admin: {
     email: process.env.ADMIN_EMAIL,
@@ -43,24 +32,6 @@ export default {
     host: process.env.BULLMQIP!,
     port: process.env.BULLMQPORT!,
   },
-  // meiliSearch
-  meiliSearch: {
-    host: process.env.MEILI_HOST!,
-    apiKey: process.env.MEILI_API_KEY!,
-    INDEX: process.env.INDEX!,
-  },
-
-  twilio: {
-    accountSid: process.env.TWILIO_ACCOUNT_SID,
-    authToken: process.env.TWILIO_AUTH_TOKEN,
-    twilioNumber: process.env.TWILIO_NUMBER,
-  },
-
-  // rabbitmq
-  rabbitmq: {
-    url: process.env.RABBITMQ_URL!,
-    emailQueue: process.env.EMAIL_QUEUE!,
-    emailRetryQueue: process.env.EMAIL_RETRY_QUEUE!,
-    emailFailedQueue: process.env.EMAIL_FAILED_QUEUE!,
-  },
+  // gateway secret
+  gatewaySecret: process.env.GATEWAY_SECRET!,
 };

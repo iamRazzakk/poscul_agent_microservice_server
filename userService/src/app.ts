@@ -7,6 +7,7 @@ import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import helmet from "helmet";
 import { apiLimiter } from "./services/rate-limiter";
 import router from "./app/routes";
+import requireGateway from "./app/middlewares/requireGateway";
 const app = express();
 
 // morgan
@@ -27,6 +28,9 @@ app.use(express.urlencoded({ extended: true }));
 //file retrieve
 app.use(express.static("uploads"));
 app.use(express.static("public"));
+
+// require gateway
+app.use(requireGateway);
 
 //router
 app.use("/service", apiLimiter, router);

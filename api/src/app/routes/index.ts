@@ -11,6 +11,9 @@ const apiRoutes = [
       target: config.userService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/user/" },
+      headers: {
+        "x-gateway-secret": config.gatewaySecret,
+      },
     }),
   },
   {
@@ -19,6 +22,9 @@ const apiRoutes = [
       target: config.userService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/auth/" },
+      headers: {
+        "x-gateway-secret": config.gatewaySecret,
+      },
     }),
   },
   {
@@ -27,6 +33,9 @@ const apiRoutes = [
       target: config.chatService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/chat/" },
+      headers: {
+        "x-gateway-secret": config.gatewaySecret,
+      },
     }),
   },
 ];
