@@ -400,10 +400,10 @@ Public base: `/api/user` on the gateway.
 
 ```json
 {
-  "name": "Sabbir",
-  "email": "sabbir@example.com",
-  "password": "password123",
-  "contact": "+8801712345678",
+  "name": "Abdur Razzak",
+  "email": "mdabdurrazzakrakib290@gmail.com",
+  "password": "123456789",
+  "contact": "+8801609502136",
   "location": "Dhaka, Bangladesh"
 }
 ```

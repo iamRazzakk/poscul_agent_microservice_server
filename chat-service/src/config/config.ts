@@ -11,4 +11,6 @@ export default {
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
   },
+  // chat service secret
+  chatServiceSecret: process.env.CHAT_SERVICE_SECRET!,
 };

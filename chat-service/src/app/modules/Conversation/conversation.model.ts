@@ -5,6 +5,7 @@ const conversationSchema = new Schema<IConversation>(
   {
     title: {
       type: String,
+      default: "New Conversation Title",
       required: true,
     },
     user: {

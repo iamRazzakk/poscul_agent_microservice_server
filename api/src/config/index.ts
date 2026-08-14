@@ -21,4 +21,14 @@ export default {
   },
   // gateway secret
   gatewaySecret: process.env.GATEWAY_SECRET!,
+  // chat service secret
+  chatServiceSecret: process.env.CHAT_SERVICE_SECRET!,
+  // jwt
+  jwt: {
+    secret: process.env.JWT_SECRET!,
+    refreshSecret: process.env.JWT_REFRESH_SECRET!,
+    accessExpiresIn: process.env.JWT_ACCESS_EXPIRES_IN!,
+    refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN!,
+    audience: process.env.JWT_AUDIENCE!,
+  },
 };
