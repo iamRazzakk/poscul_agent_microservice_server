@@ -2,17 +2,12 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { StatusCodes } from "http-status-codes";
-import { Morgan } from "./shared/morgan";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import helmet from "helmet";
-import { apiLimiter } from "./services/rate-limiter";
 import router from "./app/routes";
-import requireGateway from "./app/middlewares/requireGateway";
 const app = express();
 
 // morgan
-app.use(Morgan.successHandler);
-app.use(Morgan.errorHandler);
 app.disable("x-powered-by");
 app.use(helmet());
 app.use(
@@ -29,15 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("uploads"));
 app.use(express.static("public"));
 
-// require gateway
-app.use(requireGateway);
-
 //router
-app.use("/service", apiLimiter, router);
+app.use("/service", router);
 
 app.use("/health", (_req: Request, res: Response) => {
   res.json({
-    message: "User Service is Running",
+    message: "Chat Service is Running",
     status: "success",
     timestamp: new Date().toISOString(),
   });

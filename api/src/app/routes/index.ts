@@ -11,6 +11,9 @@ const apiRoutes = [
       target: config.userService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/user/" },
+      headers: {
+        "x-gateway-secret": config.gatewaySecret,
+      },
     }),
   },
   {
@@ -19,14 +22,20 @@ const apiRoutes = [
       target: config.userService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/auth/" },
+      headers: {
+        "x-gateway-secret": config.gatewaySecret,
+      },
     }),
   },
   {
-    path: "/agent",
+    path: "/chat",
     route: createProxyMiddleware({
-      target: config.agentService.url,
+      target: config.chatService.url,
       changeOrigin: true,
-      pathRewrite: { "^/": "/service/agent/" },
+      pathRewrite: { "^/": "/service/chat/" },
+      headers: {
+        "x-gateway-secret": config.gatewaySecret,
+      },
     }),
   },
 ];
