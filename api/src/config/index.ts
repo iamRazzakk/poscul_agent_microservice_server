@@ -71,4 +71,8 @@ export default {
   agentService: {
     url: process.env.AGENT_SERVICE_URL!,
   },
+  // chat service
+  chatService: {
+    url: process.env.CHAT_SERVICE_URL!,
+  },
 };

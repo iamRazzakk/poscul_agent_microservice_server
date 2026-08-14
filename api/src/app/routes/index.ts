@@ -22,11 +22,11 @@ const apiRoutes = [
     }),
   },
   {
-    path: "/agent",
+    path: "/chat",
     route: createProxyMiddleware({
-      target: config.agentService.url,
+      target: config.chatService.url,
       changeOrigin: true,
-      pathRewrite: { "^/": "/service/agent/" },
+      pathRewrite: { "^/": "/service/chat/" },
     }),
   },
 ];
