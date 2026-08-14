@@ -30,7 +30,7 @@ app.use(express.static("uploads"));
 app.use(express.static("public"));
 
 //router
-// app.use("/api/v1", apiLimiter, router);
+app.use("/api/v1", apiLimiter, router);
 
 app.get("/", (_req: Request, res: Response) => {
   const currentTime = new Date().toLocaleString();

@@ -1,6 +1,9 @@
 import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import config from "../../config";
+import injectGatewayHeaders from "../proxy/injectGatewayHeaders";
+import requestAccessToken from "../middlewares/requireAccessToken";
+import { stripSpoofedIdentity } from "../middlewares/stripSpoofedIdentity";
 
 const router = express.Router();
 
@@ -11,8 +14,11 @@ const apiRoutes = [
       target: config.userService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/user/" },
-      headers: {
-        "x-gateway-secret": config.gatewaySecret,
+      // headers: {
+      //   "x-gateway-secret": config.gatewaySecret,
+      // },
+      on: {
+        proxyReq: injectGatewayHeaders(config.gatewaySecret as string) as any,
       },
     }),
   },
@@ -22,21 +28,27 @@ const apiRoutes = [
       target: config.userService.url,
       changeOrigin: true,
       pathRewrite: { "^/": "/service/auth/" },
-      headers: {
-        "x-gateway-secret": config.gatewaySecret,
+      on: {
+        proxyReq: injectGatewayHeaders(config.gatewaySecret as string) as any,
       },
     }),
   },
   {
     path: "/chat",
-    route: createProxyMiddleware({
-      target: config.chatService.url,
-      changeOrigin: true,
-      pathRewrite: { "^/": "/service/chat/" },
-      headers: {
-        "x-gateway-secret": config.gatewaySecret,
-      },
-    }),
+    route: [
+      stripSpoofedIdentity,
+      requestAccessToken,
+      createProxyMiddleware({
+        target: config.chatService.url,
+        changeOrigin: true,
+        pathRewrite: { "^/": "/service/" },
+        on: {
+          proxyReq: injectGatewayHeaders(
+            config.chatServiceSecret as string,
+          ) as any,
+        },
+      }),
+    ],
   },
 ];
 
