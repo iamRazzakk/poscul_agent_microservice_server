@@ -2,6 +2,9 @@ import app from "./app";
 import colors from "colors";
 import config from "./config/config";
 import mongoose from "mongoose";
+import { RedisClient } from "./config/redis.config";
+import ApiError from "./app/error/ApiError";
+import { StatusCodes } from "http-status-codes";
 
 process.on("uncaughtException", (error) => {
   console.error("uncaughtException Detected", error);
@@ -23,6 +26,13 @@ async function main() {
         colors.yellow(`💬 Chat Service is running on port:${config.port}`),
       );
     });
+    const redisConnected = await RedisClient.connect();
+    if (!redisConnected) {
+      throw new ApiError(
+        StatusCodes.INTERNAL_SERVER_ERROR,
+        "Redis connection failed",
+      );
+    }
   } catch (error: any) {
     console.error(colors.red("🤢 Application startup failed"), error);
     process.exit(1);

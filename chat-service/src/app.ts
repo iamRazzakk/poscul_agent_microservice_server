@@ -6,7 +6,11 @@ import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import helmet from "helmet";
 import router from "./app/routes";
 import requireGateway from "./app/middlewares/requireGateway";
+import { RedisClient } from "./config/redis.config";
 const app = express();
+
+// connect redis
+RedisClient.connect();
 
 // morgan
 app.disable("x-powered-by");

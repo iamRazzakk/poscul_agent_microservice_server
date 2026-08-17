@@ -18,6 +18,17 @@ const createConversation = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllConversations = catchAsync(async (req: Request, res: Response) => {
+  const data = await ConversationService.getAllConversationsFromDB(req.user);
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.OK,
+    message: "Conversations fetched successfully",
+    data: data,
+  });
+});
+
 export const ConversationController = {
   createConversation,
+  getAllConversations,
 };
