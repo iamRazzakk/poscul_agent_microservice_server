@@ -44,7 +44,32 @@ const getAllConversationsFromDB = async (user: JwtPayload) => {
   return result;
 };
 
+
+const updateConversationIntoDB = async (id: string, payload: IConversation) => {
+  const result = await Conversation.findByIdAndUpdate(id, payload, { new: true });
+  if (!result) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      "Failed to update conversation",
+    );
+  }
+  return result;
+};
+
+const deleteConversationFromDB = async (id: string) => {
+  const result = await Conversation.findByIdAndDelete(id);
+  if (!result) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      "Failed to delete conversation",
+    );
+  }
+  return result;
+};
+
 export const ConversationService = {
   createConversationIntoDB,
   getAllConversationsFromDB,
+  updateConversationIntoDB,
+  deleteConversationFromDB,
 };
