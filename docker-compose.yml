@@ -28,8 +28,8 @@ services:
         condition: service_started
       user-service:
         condition: service_started
-      agent-service:
-        condition: service_started
+      # agent-service:
+      #   condition: service_started
     networks:
       - micro-net
     restart: unless-stopped
@@ -65,30 +65,30 @@ services:
     restart: unless-stopped
 
   # -------- Agent Service --------
-  agent-service:
-    build:
-      context: ./agent
-      dockerfile: Dockerfile
-    container_name: agent-service
-    expose:
-      - "5002"
-    env_file:
-      - ./agent/.env
-    environment:
-      - PORT=5002
-      - NODE_ENV=production
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - BULLMQIP=redis
-      - BULLMQPORT=6379
-      - RABBITMQ_URL=amqp://admin:admin@rabbitmq:5672
-      - MEILI_HOST=http://meilisearch:7700
-    depends_on:
-      redis:
-        condition: service_started
-    networks:
-      - micro-net
-    restart: unless-stopped
+  # agent-service:
+  #   build:
+  #     context: ./agent
+  #     dockerfile: Dockerfile
+  #   container_name: agent-service
+  #   expose:
+  #     - "5002"
+  #   env_file:
+  #     - ./agent/.env
+  #   environment:
+  #     - PORT=5002
+  #     - NODE_ENV=production
+  #     - REDIS_HOST=redis
+  #     - REDIS_PORT=6379
+  #     - BULLMQIP=redis
+  #     - BULLMQPORT=6379
+  #     - RABBITMQ_URL=amqp://admin:admin@rabbitmq:5672
+  #     - MEILI_HOST=http://meilisearch:7700
+  #   depends_on:
+  #     redis:
+  #       condition: service_started
+  #   networks:
+  #     - micro-net
+  #   restart: unless-stopped
 
   # -------- Infra --------
 

@@ -7,5 +7,8 @@ const router = Router();
 router
   .route("/create-conversation")
   .post(requireUser(), ConversationController.createConversation);
+router
+  .route("/")
+  .get(requireUser(), ConversationController.getAllConversations);
 
 export const ConversationRoutes = router;
