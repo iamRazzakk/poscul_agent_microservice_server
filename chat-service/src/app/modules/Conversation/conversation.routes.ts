@@ -10,5 +10,9 @@ router
 router
   .route("/")
   .get(requireUser(), ConversationController.getAllConversations);
+router
+  .route("/:id")
+  .patch(requireUser(), ConversationController.updateConversation)
+  .delete(requireUser(), ConversationController.deleteConversation);
 
 export const ConversationRoutes = router;

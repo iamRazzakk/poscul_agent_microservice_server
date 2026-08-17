@@ -23,6 +23,8 @@ export default {
   gatewaySecret: process.env.GATEWAY_SECRET!,
   // chat service secret
   chatServiceSecret: process.env.CHAT_SERVICE_SECRET!,
+  // agent service secret
+  agentServiceSecret: process.env.AGENT_SERVICE_SECRET!,
   // jwt
   jwt: {
     secret: process.env.JWT_SECRET!,

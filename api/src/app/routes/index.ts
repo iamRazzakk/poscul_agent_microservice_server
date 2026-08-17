@@ -50,6 +50,23 @@ const apiRoutes = [
       }),
     ],
   },
+  {
+    path: "/agent",
+    route: [
+      stripSpoofedIdentity,
+      requestAccessToken,
+      createProxyMiddleware({
+        target: config.agentService.url,
+        changeOrigin: true,
+        pathRewrite: { "^/": "/service/" },
+        on: {
+          proxyReq: injectGatewayHeaders(
+            config.agentServiceSecret as string,
+          ) as any,
+        },
+      }),
+    ],
+  },
 ];
 
 apiRoutes.forEach((route) => router.use(route.path, route.route as any));
