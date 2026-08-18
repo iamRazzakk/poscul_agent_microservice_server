@@ -13,6 +13,11 @@ const messageSchema = new Schema<IMessage>(
       ref: "User",
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["user", "assistant"],
+      required: true,
+    },
     content: {
       type: String,
       required: true,

@@ -10,7 +10,7 @@ const requireGateway = (req: Request, res: Response, next: NextFunction) => {
       return next();
     }
     const secret = req.headers["x-gateway-secret"];
-    if (secret !== config.chatServiceSecret) {
+    if (secret !== config.agentServiceSecret) {
       sendResponse(res, {
         success: false,
         statusCode: StatusCodes.FORBIDDEN,
