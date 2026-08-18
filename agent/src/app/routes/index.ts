@@ -1,14 +1,7 @@
 import express from "express";
-import { FileRoutes } from "../modules/file/file.routes";
+import agentController from "../modules/agent/agent.controller";
+import requireUser from "../middlewares/requireUser";
 
 const router = express.Router();
-
-const apiRoutes = [
-  {
-    path: "/file",
-    route: FileRoutes,
-  },
-];
-
-apiRoutes.forEach((route) => router.use(route.path, route.route));
+router.route("/chat").post(requireUser(), agentController);
 export default router;

@@ -1,1 +1,5 @@
-export const searchAgent = (params: any) => {};
+export const searchAgent = async (params: any) => {
+  return {
+    ...params,
+  };
+};

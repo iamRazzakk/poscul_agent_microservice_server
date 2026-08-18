@@ -1,5 +1,6 @@
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatGroq } from "@langchain/groq";
+import config from "../../config/config";
 
 export const groqLLmModel = new ChatGroq({
   model: "openai/gpt-oss-120b",
@@ -9,6 +10,7 @@ export const groqLLmModel = new ChatGroq({
 });
 
 export const googleLLmModel = new ChatGoogleGenerativeAI({
+  apiKey: config.geminiApiKey,
   model: "gemini-2.5-flash",
   temperature: 0,
   maxRetries: 2,
