@@ -7,7 +7,7 @@ import graph from "../../graph/graph";
 import sendResponse from "../../shared/sendResponse";
 
 const chatServiceHeaders = (req: Request) => ({
-  "x-gateway-secret": config.chatServiceSecret,
+  "x-gateway-secret": config?.chatServiceSecret as string,
   "x-user-id": String(req.user?.id ?? ""),
   "x-user-role": String(req.user?.role ?? ""),
 });
@@ -33,7 +33,7 @@ const agentController = async (req: Request, res: Response) => {
     sendResponse(res, {
       success: true,
       statusCode: StatusCodes.OK,
-      message: "Agent created successfully",
+      message: "Agent response",
       data: result.aiResponse,
     });
   } catch (error) {

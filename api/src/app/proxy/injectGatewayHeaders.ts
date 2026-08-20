@@ -9,9 +9,16 @@ const injectGatewayHeaders = (gatewaySecret: string) => {
     proxyReq.removeHeader("x-user-role");
     proxyReq.removeHeader("x-gateway-secret");
 
-    if (expressReq.user?.id) {
-      proxyReq.setHeader("x-user-id", String(expressReq.user.id));
-      proxyReq.setHeader("x-user-role", String(expressReq.user.role ?? ""));
+    const userId =
+      expressReq.user?.id ??
+      (expressReq.headers["x-user-id"] as string | undefined);
+    const userRole =
+      expressReq.user?.role ??
+      (expressReq.headers["x-user-role"] as string | undefined);
+
+    if (userId) {
+      proxyReq.setHeader("x-user-id", String(userId));
+      proxyReq.setHeader("x-user-role", String(userRole ?? ""));
     }
 
     proxyReq.setHeader("x-gateway-secret", gatewaySecret);
