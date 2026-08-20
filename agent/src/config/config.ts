@@ -12,8 +12,12 @@ export default {
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
   },
-  // chat service secret
   agentServiceSecret: process.env.AGENT_SERVICE_SECRET!,
   chatServiceSecret: process.env.CHAT_SERVICE_SECRET!,
   chatServiceApi: process.env.CHAT_SERVICE_API!,
+  jwt: {
+    secret: process.env.JWT_SECRET!,
+    audience: process.env.JWT_AUDIENCE!,
+    accessExpiresIn: process.env.JWT_ACCESS_EXPIRES_IN!,
+  },
 };

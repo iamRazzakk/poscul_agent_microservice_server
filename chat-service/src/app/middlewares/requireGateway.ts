@@ -9,7 +9,8 @@ const requireGateway = (req: Request, res: Response, next: NextFunction) => {
     if (req.path === "/health" || req.originalUrl.startsWith("/health")) {
       return next();
     }
-    const secret = req.headers["x-gateway-secret"];
+    const rawSecret = req.headers["x-gateway-secret"];
+    const secret = Array.isArray(rawSecret) ? rawSecret[0] : rawSecret;
     if (secret !== config.chatServiceSecret) {
       sendResponse(res, {
         success: false,
